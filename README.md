@@ -1,4 +1,4 @@
-# vue-project
+# Vue-Weather-App
 
 ## Project setup
 ```
@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 
+"babel-eslint" is used istead "@babel/eslint-parser"
+"@vue/eslint-config-airbnb" is used instead "eslint-config-prettier"
+"eslint-plugin-prettier" is not used
