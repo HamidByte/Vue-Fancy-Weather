@@ -1,4 +1,8 @@
-# Vue-Weather-App
+# Vue-Fancy-Weather
+
+Open .env file and add your API Keys
+-OpenWeatherMap API Key in VUE_APP_OPEN_WEATHER_API_URL
+-Weatherbit API Key in VUE_APP_WEATHERBIT_API_KEY
 
 ## Project setup
 ```

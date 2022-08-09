@@ -41,8 +41,8 @@ export default new Vuex.Store({
     updateCountryInfo(state) {
       axios.get(`https://restcountries.com/v2/alpha/${state.countryCode}`)
         .then(response => {
-          // console.log(response)
           state.countryInfo = response.data
+          // console.log('countryInfo', response)
         })
         .catch(error => {
           // eslint-disable-next-line no-console
@@ -52,7 +52,6 @@ export default new Vuex.Store({
     updateCityInfo(state, payload) {
       state.city = payload.cityData.name
       state.state = payload.cityData.state
-      state.countryCode = payload.cityData.country
       state.lat = payload.cityData.lat
       state.lon = payload.cityData.lon
     },
@@ -60,8 +59,8 @@ export default new Vuex.Store({
       // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${state.lat}&lon=${state.lon}&appid=${state.OPEN_API_KEY}`
       axios.get(`https://api.weatherbit.io/v2.0/current?city=${state.city}&country=${state.countryCode}&key=${state.BIT_API_KEY}`)
         .then(response => {
-          // console.log(response)
           [state.weather] = response.data.data // same as state.weather = response.data.data[0]
+          // console.log('weather', response)
           if (response.status === 200) {
             state.isDataRecived = true
           } else {

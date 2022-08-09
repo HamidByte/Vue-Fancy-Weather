@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ cityName }} | {{ state }} | {{ countryInfo.name }}</h2>
+    <h2>{{ cityName }}</h2>
     <h1 class="">
       {{ weather.temp }}
       <span>°C</span>
@@ -22,17 +22,9 @@ export default {
       type: String,
       default: '',
     },
-    state: {
-      type: String,
-      default: '',
-    },
     countryCode: {
       type: String,
       default: '',
-    },
-    countryInfo: {
-      type: Object,
-      default: () => ({}),
     },
     weather: {
       type: Object,

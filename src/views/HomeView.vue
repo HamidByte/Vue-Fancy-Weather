@@ -1,44 +1,57 @@
 <template>
   <div>
-    <div
-      class="autocomplete"
-    >
-      <label for="city">
-        <input
-          v-model.trim="cityEntered"
-          type="search"
-          name="city"
-          placeholder="City"
-          @change="getGeocoding"
+    <b-container class="mt-4">
+      <b-row class="text-center align-items-center">
+        <b-col
+          class="my-auto"
+          align="center"
         >
-        <!-- <button type="button" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
-          <font-awesome-icon icon="fa-solid fa-xmark" />
-        </button> -->
-      </label>
-      <ul
-        v-if="citiesList.length > 0 && cityEntered.length > 0"
-        class="autocomplete-items"
-      >
-        <li
-          v-for="(c, index) in citiesList"
-          :key="index"
-          @click="getData(c, $event)"
-        >
-          <small>
-            <span><strong>{{ c.name }}, {{ c.state }}</strong></span>
-            <span class="float-right">{{ c.country }}</span>
-          </small>
-        </li>
-      </ul>
-    </div>
+          <div
+            class="autocomplete"
+          >
+            <label for="city">
+              <input
+                id="city"
+                v-model.trim="cityEntered"
+                type="search"
+                class="search-city"
+                name="city"
+                placeholder="City"
+                @change="getGeocoding"
+              >
+              <!-- <button type="button" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
+                <font-awesome-icon icon="fa-solid fa-xmark" />
+              </button> -->
+            </label>
+            <ul
+              v-if="citiesList.length > 0 && cityEntered.length > 0"
+              class="autocomplete-items"
+            >
+              <li
+                v-for="(c, index) in citiesList"
+                :key="index"
+                @click="getData(c, $event)"
+              >
+                <small>
+                  <span><strong>{{ c.name }}, {{ c.state }}</strong></span>
+                  <span class="float-right">{{ c.country }}</span>
+                </small>
+              </li>
+            </ul>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
 
     <div v-if="isDataRecived">
       <WeatherWidget
         :city-name="weather.city_name"
-        :state="state"
         :country-code="countryCode"
-        :country-info="countryInfo"
         :weather="weather"
+      />
+      <CountryDetail
+        :state="state"
+        :country-info="countryInfo"
       />
       <WeatherDetail />
     </div>
@@ -47,7 +60,12 @@
 
 <script>
 // @ is an alias to /src
-// import { BButton } from 'bootstrap-vue'
+import {
+  BContainer,
+  BRow,
+  BCol,
+} from 'bootstrap-vue'
+import CountryDetail from '@/components/CountryDetail.vue'
 import WeatherWidget from '@/components/WeatherWidget.vue'
 import WeatherDetail from '@/components/WeatherDetail.vue'
 /* add fontawesome core */
@@ -60,6 +78,10 @@ library.add(faXmark)
 export default {
   name: 'HomeView',
   components: {
+    BContainer,
+    BRow,
+    BCol,
+    CountryDetail,
     WeatherWidget,
     WeatherDetail,
   },
@@ -69,8 +91,8 @@ export default {
     }
   },
   computed: {
-    state() {
-      return this.$store.state.state
+    citiesList() {
+      return this.$store.state.citiesList
     },
 
     countryCode() {
@@ -81,6 +103,10 @@ export default {
       return this.$store.state.countryInfo
     },
 
+    state() {
+      return this.$store.state.state
+    },
+
     lat() {
       return this.$store.state.lat
     },
@@ -89,17 +115,14 @@ export default {
       return this.$store.state.lon
     },
 
-    citiesList() {
-      return this.$store.state.citiesList
+    weather() {
+      return this.$store.state.weather
     },
 
     isDataRecived() {
       return this.$store.state.isDataRecived
     },
 
-    weather() {
-      return this.$store.state.weather
-    },
   },
   beforeMount() {
     // this.cityEntered = this.$store.state.city
@@ -138,10 +161,45 @@ export default {
 }
 
 input {
-  border: 1px solid transparent;
+  /* border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
-  font-size: 16px;
+  font-size: 16px; */
+}
+
+input:focus {
+  outline: 0;
+}
+
+input::placeholder {
+  color: #8F8F8F;
+  opacity: 1; /* Firefox */
+}
+
+input.search-city {
+  font-family: 'Ubuntu', sans-serif;
+  /* display: block; */
+  /* margin: 0; */
+  padding: 10px;
+  border: 0;
+  /* border-radius: 5px; */
+  font-size: 36px;
+  font-weight: 300;
+  background: rgba(0,0,0,.02);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.3);
+  color: #757575;
+  transition: all .15s ease;
+}
+
+input.search-city:hover {
+  background: rgba(0,0,0,.04);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.5);
+}
+
+input.search-city:focus {
+  background: rgba(0,0,0,.05);
+  outline: none;
+  box-shadow: inset 0 -2px 0 #0077FF;
 }
 
 ul {

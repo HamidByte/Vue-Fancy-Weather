@@ -36,6 +36,6 @@ module.exports = {
     // "no-process-exit": "off",
     // "object-shorthand": "off",
     // "class-methods-use-this": "off",
-    'vuejs-accessibility/click-events-have-key-events': 'off'
+    'vuejs-accessibility/click-events-have-key-events': 'off',
   },
 }
