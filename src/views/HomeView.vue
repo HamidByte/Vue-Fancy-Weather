@@ -28,13 +28,13 @@
               class="autocomplete-items"
             >
               <li
-                v-for="(c, index) in citiesList"
+                v-for="(city, index) in citiesList"
                 :key="index"
-                @click="getData(c, $event)"
+                @click="getData(city, $event)"
               >
                 <small>
-                  <span><strong>{{ c.name }}, {{ c.state }}</strong></span>
-                  <span class="float-right">{{ c.country }}</span>
+                  <span><strong>{{ city.name }}, {{ city.state }}</strong></span>
+                  <span class="float-right">{{ city.country }}</span>
                 </small>
               </li>
             </ul>
@@ -45,15 +45,17 @@
 
     <div v-if="isDataRecived">
       <WeatherWidget
-        :city-name="weather.city_name"
+        :city="cityName"
         :country-code="countryCode"
+        :date-time="dateTime"
         :weather="weather"
       />
+
       <CountryDetail
+        :city="cityName"
         :state="state"
         :country-info="countryInfo"
       />
-      <WeatherDetail />
     </div>
   </div>
 </template>
@@ -65,15 +67,8 @@ import {
   BRow,
   BCol,
 } from 'bootstrap-vue'
-import CountryDetail from '@/components/CountryDetail.vue'
 import WeatherWidget from '@/components/WeatherWidget.vue'
-import WeatherDetail from '@/components/WeatherDetail.vue'
-/* add fontawesome core */
-import { library } from '@fortawesome/fontawesome-svg-core'
-/* add some free styles */
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-/* add each imported icon to the library */
-library.add(faXmark)
+import CountryDetail from '@/components/CountryDetail.vue'
 
 export default {
   name: 'HomeView',
@@ -81,9 +76,8 @@ export default {
     BContainer,
     BRow,
     BCol,
-    CountryDetail,
     WeatherWidget,
-    WeatherDetail,
+    CountryDetail,
   },
   data() {
     return {
@@ -91,6 +85,9 @@ export default {
     }
   },
   computed: {
+    cityName() {
+      return this.$store.state.city
+    },
     citiesList() {
       return this.$store.state.citiesList
     },
@@ -115,6 +112,10 @@ export default {
       return this.$store.state.lon
     },
 
+    dateTime() {
+      return this.$store.state.dateTime
+    },
+
     weather() {
       return this.$store.state.weather
     },
@@ -128,114 +129,37 @@ export default {
     // this.cityEntered = this.$store.state.city
   },
   methods: {
-    getGeocoding() {
+    async getGeocoding() {
       if (this.cityEntered !== '') {
-        this.$store.dispatch({
+        await this.$store.dispatch({
           type: 'getGeocodingInfo',
-          city: this.cityEntered,
+          cityName: this.cityEntered,
         })
       }
     },
 
-    getData(c) {
-      this.$store.dispatch({
+    async getData(city) {
+      await this.$store.commit('updateCityName', { cityName: city.name })
+
+      // Update lat and lon in the store
+      await this.$store.commit('updateLatLon', city)
+
+      await this.$store.dispatch('getDateTime')
+
+      await this.$store.dispatch({
         type: 'getCountryInfo',
-        countryCode: c.country,
+        countryCode: city.country,
       })
-      this.$store.dispatch({
+
+      await this.$store.dispatch({
         type: 'getWeatherInfo',
-        cityData: c,
+        cityData: city,
       })
     },
   },
 }
 </script>
+
 <style scoped>
-.autocomplete, input {
-  width: 600px;
-}
-
-.autocomplete {
-  position: relative;
-  display: inline-block;
-}
-
-input {
-  /* border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px; */
-}
-
-input:focus {
-  outline: 0;
-}
-
-input::placeholder {
-  color: #8F8F8F;
-  opacity: 1; /* Firefox */
-}
-
-input.search-city {
-  font-family: 'Ubuntu', sans-serif;
-  /* display: block; */
-  /* margin: 0; */
-  padding: 10px;
-  border: 0;
-  /* border-radius: 5px; */
-  font-size: 36px;
-  font-weight: 300;
-  background: rgba(0,0,0,.02);
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,.3);
-  color: #757575;
-  transition: all .15s ease;
-}
-
-input.search-city:hover {
-  background: rgba(0,0,0,.04);
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,.5);
-}
-
-input.search-city:focus {
-  background: rgba(0,0,0,.05);
-  outline: none;
-  box-shadow: inset 0 -2px 0 #0077FF;
-}
-
-ul {
-  list-style-type: none;
-  margin-top: -8px;
-  padding: 0;
-}
-
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-
-.autocomplete-items li {
-  margin-top: 0;
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-}
-
-/*when hovering an item:*/
-.autocomplete-items li:hover {
-  background-color: #e9e9e9;
-}
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
-  background-color: DodgerBlue !important;
-  color: #ffffff;
-}
+@import '~@/assets/scss/search.scss';
 </style>
