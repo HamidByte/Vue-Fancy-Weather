@@ -71,7 +71,7 @@ export default new Vuex.Store({
     },
     async getCitiesList(context) {
       try {
-        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${context.state.city}&limit=5&appid=${context.state.OPEN_WEATHER_API_KEY}`)
+        const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${context.state.city}&limit=5&appid=${context.state.OPEN_WEATHER_API_KEY}`)
         context.commit('updateCitiesList', response.data)
         // eslint-disable-next-line no-console
         // console.log('Cities list provided by OpenWeatherMap', response)
