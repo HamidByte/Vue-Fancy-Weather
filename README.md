@@ -1,13 +1,14 @@
-# Fancy Weather
+# Vue Fancy Weather
 
-Fancy Weather is a sleek and user-friendly weather application powered by Vue.js. It provides real-time weather updates, elegant date and time display, and insightful country information in a stylish interface.
+Vue Fancy Weather is a sleek and user-friendly weather application powered by Vue.js. It provides real-time weather updates, elegant date and time display, and insightful country information in a stylish interface.
 
 ## Screenshots
 
-![Fancy Weather Home Page Image](https://raw.githubusercontent.com/mhamid49/Vue-Fancy-Weather/master/public/ui/home.png "Fancy Weather Home Page")
+![Vue Fancy Weather Home Page Image](https://raw.githubusercontent.com/HamidByte/Vue-Fancy-Weather/master/public/ui/home.png 'Vue Fancy Weather Home Page')
 
 ## Demo
-You can check out a live demo of Fancy Weather [here](https://github.com/mhamid49/Vue-Fancy-Weather).
+
+You can check out a live demo of Vue Fancy Weather [here](https://vuefancyweather.netlify.app/).
 
 ## Features
 
@@ -44,13 +45,15 @@ Make sure to replace placeholders like `your_openweather_api_key`, and `your_api
 ## Usage
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/mhamid49/fancy-weather.git
+   git clone https://github.com/HamidByte/Vue-Fancy-Weatherr.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
-   cd fancy-weather
+   cd Vue-Fancy-Weather
    ```
 
 3. Install dependencies:
@@ -64,27 +67,37 @@ Make sure to replace placeholders like `your_openweather_api_key`, and `your_api
 5. Open your web browser and visit localhost:8080.
 
 ## Project setup
+
 Install project dependencies:
-   ```bash
-   npm install
-   ```
+
+```bash
+npm install
+```
+
 ### Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```
+
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
+
 ### Lints and fixes files
+
 ```
 npm run lint
 ```
 
 ## Acknowledgments
+
 Thank you to the open-source community for providing valuable tools and libraries.
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### ESLint Configuration Choices
@@ -92,12 +105,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 In this project, we've made some specific choices in the ESLint configuration to ensure code consistency and maintainability. Here are the key decisions:
 
 1. **Parser Choice:**
+
    - Initially, we used **"@babel/eslint-parser"** as the parser for ESLint. However, in the latest configuration, we have switched to using **"babel-eslint"**. This choice aligns with projects using Babel for JavaScript transpilation and has been a reliable parser for ESLint.
-    Both packages serve a similar purpose, providing ESLint parser support for Babel. Using "babel-eslint" is a common approach, and it often works well with projects using Babel for JavaScript transpilation.
+     Both packages serve a similar purpose, providing ESLint parser support for Babel. Using "babel-eslint" is a common approach, and it often works well with projects using Babel for JavaScript transpilation.
 
 2. **Style Guide:**
+
    - Our ESLint configuration was initially based on the **"eslint-config-prettier"** style guide. However, in the current configuration, we have migrated to **"@vue/eslint-config-airbnb"**. This style guide follows the Airbnb JavaScript style guide, providing a set of rules that contribute to code consistency and readability.
 
 3. **Prettier Integration:**
    - Initially, we had **"eslint-plugin-prettier"** installed. In the current configuration, we have opted not to use this package explicitly. Instead, we rely on Prettier's formatting directly. This decision streamlines the integration of Prettier with ESLint without the need for an additional plugin.
-    This is a reasonable decision if you want to rely on Prettier's formatting without explicitly configuring ESLint to run Prettier rules. The integration of Prettier with ESLint can be achieved without the "eslint-plugin-prettier" package, but make sure your Prettier configuration is correctly set up.
+     This is a reasonable decision if you want to rely on Prettier's formatting without explicitly configuring ESLint to run Prettier rules. The integration of Prettier with ESLint can be achieved without the "eslint-plugin-prettier" package, but make sure your Prettier configuration is correctly set up.

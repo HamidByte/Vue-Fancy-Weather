@@ -5,7 +5,7 @@
         to="/"
         class="navbar-brand"
       >
-        Fancy Weather
+        Vue Fancy Weather
       </router-link>
       <button
         class="navbar-toggler"

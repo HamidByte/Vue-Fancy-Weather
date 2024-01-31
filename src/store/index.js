@@ -132,7 +132,7 @@ export default new Vuex.Store({
       try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${context.state.lat}&lon=${context.state.lon}&appid=${context.state.OPEN_WEATHER_API_KEY}`)
         // eslint-disable-next-line no-console
-        console.log('Weather information provided by OpenWeatherMap', JSON.stringify(response.data))
+        // console.log('Weather information provided by OpenWeatherMap', JSON.stringify(response.data))
         if (response.status === 200) {
           context.commit('updateWeatherInfo', response.data)
           context.commit('setIsDataReceived', true)

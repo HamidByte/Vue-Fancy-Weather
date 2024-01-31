@@ -5,10 +5,10 @@
         <div class="row h-100 align-items-center py-5">
           <div class="col-lg-6">
             <h1 class="display-4">
-              Fancy Weather
+              Vue Fancy Weatherr
             </h1>
             <p class="lead text-muted mb-0">
-              Fancy Weather is a sleek and user-friendly weather app powered by Vue.js. It offers a stylish interface providing real-time weather updates, elegant date and time display, and insightful country information. Enjoy the simplicity of checking the weather with a touch of elegance.
+              Vue Fancy Weather is a sleek and user-friendly weather app powered by Vue.js. It offers a stylish interface providing real-time weather updates, elegant date and time display, and insightful country information. Enjoy the simplicity of checking the weather with a touch of elegance.
             </p>
             <!-- <p class="lead text-muted">
               For documentation visit
